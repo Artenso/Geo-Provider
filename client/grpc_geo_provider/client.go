@@ -3,21 +3,17 @@ package client
 import (
 	"context"
 
+	cli "github.com/Artenso/Geo-Provider/client"
 	"github.com/Artenso/Geo-Provider/internal/model"
 	desc "github.com/Artenso/Geo-Provider/pkg/grpc_geo_provider"
 	"google.golang.org/grpc"
 )
 
-type Client interface {
-	AddressSearch(ctx context.Context, input string) ([]*model.Address, error)
-	GeoCode(ctx context.Context, lat, lng string) ([]*model.Address, error)
-}
-
 type client struct {
 	client desc.GeoProviderClient
 }
 
-func NewClient(conn *grpc.ClientConn) Client {
+func NewGRPCclient(conn *grpc.ClientConn) cli.Client {
 	return &client{
 		client: desc.NewGeoProviderClient(conn),
 	}
