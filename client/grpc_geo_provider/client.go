@@ -17,7 +17,7 @@ type client struct {
 	client desc.GeoProviderClient
 }
 
-func NewClient(conn *grpc.ClientConn) Client {
+func NewGRPCclient(conn *grpc.ClientConn) Client {
 	return &client{
 		client: desc.NewGeoProviderClient(conn),
 	}
