@@ -6,20 +6,16 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 
+	cli "github.com/Artenso/Geo-Provider/client"
 	"github.com/Artenso/Geo-Provider/internal/model"
 	jsonRPCmodel "github.com/Artenso/Geo-Provider/internal/model/json_rpc_geo_provider"
 )
-
-type Client interface {
-	AddressSearch(ctx context.Context, input string) ([]*model.Address, error)
-	GeoCode(ctx context.Context, lat, lng string) ([]*model.Address, error)
-}
 
 type client struct {
 	client *rpc.Client
 }
 
-func NewJSONrpcClient(conn io.ReadWriteCloser) Client {
+func NewJSONrpcClient(conn io.ReadWriteCloser) cli.Client {
 	return &client{
 		client: jsonrpc.NewClient(conn),
 	}
